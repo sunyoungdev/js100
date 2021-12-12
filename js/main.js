@@ -346,3 +346,77 @@ function findPresident(data) {
 findPresident('원범 원범 혜원 혜원 혜원 혜원 유진 유진 유진 유진 유진');
 
 // q38
+function findTop3(score) {
+    const scores = score.trim().split(' ').map((score) => parseInt(score, 10));
+    scores.sort((a, b) => a - b);
+    console.log(scores);    // [55, 66, 75, 85, 86, 95, 97, 97, 97, 97]
+
+    let count = 0;
+    let arr = [];
+    while (arr.length < 3) {
+        let n = scores.pop();
+        if (!arr.includes(n)) {
+            arr.push(n);
+        }
+        count += 1;
+    }
+    console.log(count);
+}
+findTop3('97 86 75 66 55 97 85 97 97 95');
+
+// q39
+// function replaceTypo(str, searchStr, replaceStr) {
+//     console.log(str.split(searchStr).join(replaceStr));
+// }
+// replaceTypo('hqllo my namq is hyqwon', 'q', 'e');
+
+// replace(regexp|substr, newSubstr|function) => 어떤 패턴에 일치하는 일부 또는 모든 부분이 교체된 새로운 문자열을 반환
+// 모든 문자열에 대해 검색하고 바꾸려면 정규표현식의 g플래그를 포함하세요.
+
+function replaceTypoWithReg(str) {
+    const reg = /q/gi;
+    console.log(str.replace(reg, 'e'));
+}
+replaceTypoWithReg('hqllo my namq is hyqwon');
+
+// q40
+function weightCheck() {
+    const limit = prompt('제한 무게?');
+    const num = prompt('총 몇 명?');
+    let total = 0;
+    let count = 0;
+    for (let i = 1; i <= num; i++) {
+        total += parseInt(prompt('몸무게?'), 10);
+        if (total <= limit) {
+            count = i;
+        }
+    }
+    console.log(count);
+};
+// weightCheck();
+
+// q41
+function isPrime(num) {
+    if (num === 2) {
+        return console.log(true);
+    } else if (num <= 1) {
+        return console.log(false);
+    }
+    for (let i = 2; i < num; i++) {
+        if (num % i === 0) {
+            return console.log(false);
+        }
+    }
+    return console.log(true);
+}
+isPrime(3);
+
+// q42
+function getDay(year, month, date) {
+    const day = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    const dateInfo = new Date(year, month - 1, date);   // 월은 0부터 시작
+    const x = dateInfo.getDay();    // 0부터 시작
+    console.log(day[x]);
+}
+getDay(2020, 5, 24);
+
