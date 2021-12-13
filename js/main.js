@@ -420,3 +420,139 @@ function getDay(year, month, date) {
 }
 getDay(2020, 5, 24);
 
+// q43
+// 십진수에서 다른 진수로 변환 시킬때는 toString을 사용 + 문자=>숫자열은 parsInt
+// 다른 진수에서 십진수로 변환시킬때는 parseInt를 사용
+// parseInt("10101101000", 2) // 1384
+
+function get2Radix(num) {
+    console.log(parseInt(num.toString(2)));
+}
+get2Radix(555);
+
+// q44
+function getTotal(num) {
+    const nums = num.trim().split('').map((n) => parseInt(n, 10));
+    const total = nums.reduce((prev, curr) => prev + curr);
+    console.log(total);
+}
+getTotal('18234');  // 18
+
+// q45
+// 1000 * 60 * 60 * 24 * 365은 1년, getTime으로 나온 값을 1년으로 나누면 1970년도 이후부터 흐른 연도가 나온다.
+// 거기에 1970을 더해주면 이번년도
+function getCurrYear() {
+    const date = new Date();
+    const time = date.getTime();
+    const year = Math.floor(time / (1000 * 60 * 60 * 24 * 365)) + 1970;
+    console.log(year);
+}
+getCurrYear();
+
+// q46
+function getTotal2(startNum, endNum) {
+    let nums = [];
+    for (let i = startNum; i <= endNum; i++) {
+        nums.push(i);
+    }
+    nums = nums.join('').split('').map((n) => parseInt(n, 10));
+    const total = nums.reduce((prev, curr) => prev + curr);
+    console.log(total);
+}
+getTotal2(1, 20);
+
+// q47
+// Set 객체는 자료형에 관계 없이 원시 값과 객체 참조 모두 유일한 값을 저장할 수 있다. 
+// Object.keys() 메소드는 주어진 객체의 속성 이름들을 일반적인 반복문과 동일한 순서로 순회되는 열거할 수 있는 배열로 반환
+const people = {
+    이호준: "01050442903",
+    이호상: "01051442904",
+    이준호: "01050342904",
+    이호준: "01050442903",
+    이준: "01050412904",
+    이호: "01050443904",
+    이호준: "01050442903"
+  };
+function checkDup(obj) {
+    const result = new Set();
+    for (let key in obj) {
+        result.add(obj[key]);
+    }
+    console.log(result.size);
+}
+checkDup(people);
+
+// const set = new Set(Object.keys(people));
+// console.log(set.size)
+
+// Set()
+const set1 = new Set();
+set1.add({ x: 10, y: 20 }).add({ x: 20, y: 30 });
+console.log(set1);
+// Delete any point with `x > 10`.
+set1.forEach((point) => {
+  if (point.x > 10) {
+    set1.delete(point);
+  }
+});
+
+console.log(set1.size);
+// expected output: 1
+
+// q48
+function changeCases(str) {
+    const UPPERCASE = 'ABCDEFGHIGKLMNOPQRSTUVWXYZ';
+    let result = '';
+    for (let i = 0; i < str.length; i++) {
+        let alph;
+        if (UPPERCASE.includes(str[i])) {
+            alph = str[i].toLowerCase();
+        } else {
+            alph = str[i].toUpperCase();
+        }
+        result += alph;
+    }
+    console.log(result);
+}
+changeCases('AAABBBcccddd');
+
+function changeCases2(str) {
+    let result = [];
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] === str[i].toLowerCase()) {
+            result.push(str[i].toUpperCase());
+        } else {
+            result.push(str[i].toLowerCase());
+        }
+    }
+    console.log(result.join(''));
+}
+changeCases2('AAABBBcccddd');
+
+// q49
+function getMaxNum(str) {
+    const nums = str.trim().split(' ');
+    nums.sort((a, b) => a - b);
+    const max = nums.pop();
+    console.log(max);
+}
+getMaxNum('10 9 8 7 6 5 4 3 2 1');
+
+// q50
+function bubble(str) {
+    let result = str.split(' ').map((n) => {
+        return parseInt(n, 10);
+      }); 
+  
+    for (let i = 0; i < result.length - 1; i++) { // 순차적으로 비교하기 위한 반복문
+      for (let j = 0; j < result.length - 1 - i; j++) { // 끝까지 돌았을 때 다시 처음부터 비교하기 위한 반복문
+        if (result[j] > result[j + 1]) { // 두 수를 비교하여 앞 수가 뒷 수보다 크면
+           let temp = result[j];         // 두 수를 서로 바꿔준다
+           result[j] = result[j + 1];
+           result[j + 1] = temp;
+        }
+      }
+    }
+    return console.log(result);
+  }  
+bubble('1 2 4 1 5 2 6');
